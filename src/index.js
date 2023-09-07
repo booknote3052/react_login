@@ -1,14 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./Login";
+
+import Register from "./register";
+import Table1 from "./table1";
+import Case from "./case";
+import Dashboard from "./Dashboard";
+import ListItem from "./listItem";
+import Header from "./header";
+import App from "./App";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <BrowserRouter>
+  <Routes>
+    
+    <Route path="/" element={<Login />} />
+  
+
+    <Route path="/login" element={<Login />} />
+  </Routes>
+  
+  <App>
+  <Routes>
+  <Route path="/dashboard" element={<Dashboard />} />
+  </Routes>
+    </App>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
