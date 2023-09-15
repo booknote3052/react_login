@@ -5,11 +5,10 @@ import {
   TableRow,
   TableCell,
   TableHead,
-  TableContainer,
+ 
   Table,
 } from "@mui/material";
 
-import CssBaseline from "@mui/material/CssBaseline";
 
 import { Link } from "react-router-dom";
 
@@ -67,8 +66,7 @@ export  default function Case() {
     getJSON();
 
     async function getJSON1() {
-      const response = await fetch(
-        "http://localhost:3333/getinfocase/" + admin_id,
+      const response = await fetch("http://localhost:3333/getinfocase/" + admin_id,
         {
           method: "GET", // or 'PUT'
         }

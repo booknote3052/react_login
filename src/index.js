@@ -5,14 +5,12 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Login";
+import Casestatus from "./pages/casestatus/casestatus";
+import Casepersoninfo from "./pages/casepersoninfo/casepersoninfo";
 
-import Register from "./register";
-import Table1 from "./table1";
-import Case from "./case";
-import Dashboard from "./Dashboard";
-import ListItem from "./listItem";
-import Header from "./header";
-import App from "./App";
+import Casecontactinfo from "./pages/casecontactinfo/casecontactinfo";
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
@@ -22,13 +20,14 @@ root.render(
   
 
     <Route path="/login" element={<Login />} />
+  
+    <Route path="/casestatus" element={<Casestatus />} />
+    <Route path="/casecontactinfo" element={<Casecontactinfo />} />
+    <Route path="/casepersoninfo" element={<Casepersoninfo />} />
+
+ 
   </Routes>
   
-  <App>
-  <Routes>
-  <Route path="/dashboard" element={<Dashboard />} />
-  </Routes>
-    </App>
   </BrowserRouter>
 );
 

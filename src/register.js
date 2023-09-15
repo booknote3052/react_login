@@ -1,29 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
+// eslint-disable-next-line
+import React, { useState, useEffect } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
 
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -33,61 +39,41 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const [Provice1, setProvice] = React.useState('');
+  const [Provice1, setProvice] = React.useState("");
 
-  const [amphpur1, setAmphur] = React.useState('');
+  const [amphpur1, setAmphur] = React.useState("");
   const [provice, setData] = useState([]);
   const [tambon, setData1] = useState([]);
   useEffect(() => {
-   
-      async function getJSON() {
-          
-            const response = await fetch("http://localhost:3333/getprovice", {
-              method: "GET", // or 'PUT'
-              
-           
-            });
-        
-           
-            
-            const data = await response.json();
-            
-            
-            
-          
-          setData(data);
+    async function getJSON() {
+      const response = await fetch("http://localhost:3333/getprovice", {
+        method: "GET", // or 'PUT'
+      });
 
-        }
-        getJSON();
-        
-     
-      }, [])
-     
-      //console.log(provice,amphur);*/
+      const data = await response.json();
+
+      setData(data);
+    }
+    getJSON();
+  }, []);
+
+  //console.log(provice,amphur);*/
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    localStorage.setItem('IDnumber',data.get('IDnumber'))
-   
-  
-  const  jsonData = {
-        IDnumber: data.get('IDnumber'),
-        // fname : data.get('firstName'),
-        // lname : data.get('lastName'),
-        // nation : data.get('nation'),
-        // status : data.get('status'),
-        // tel : data.get('tel'),
-        // Province : data.get('province'),
-        // amphures : data.get('amphur'),
-        
-        postcode :data.get('postcode')
-    }
+    localStorage.setItem("IDnumber", data.get("IDnumber"));
+
+    const jsonData = {
+      IDnumber: data.get("IDnumber"),
+      
+
+      postcode: data.get("postcode"),
+    };
     console.log(jsonData);
-    if(tambon.length===0){
-      alert('รหัสไปรษณีย์ไม่ถูกต้อง');
-    }
-    else{
-    async function postJSON(jsonData) {
+    if (tambon.length === 0) {
+      alert("รหัสไปรษณีย์ไม่ถูกต้อง");
+    } else {
+      async function postJSON(jsonData) {
         try {
           const response = await fetch("http://localhost:3333/register", {
             method: "POST", // or 'PUT'
@@ -96,58 +82,45 @@ export default function SignUp() {
             },
             body: JSON.stringify(jsonData),
           });
-      
+
           const result = await response.json();
           console.log("Success:", result);
-          if(result.status==='ok'){
+          if (result.status === "ok") {
             //localStorage.setItem('token',result.token)
-            window.location='/table1'
-           // alert('regsiter ok')
-          }else {
-            window.location='/register'
+            window.location = "/table1";
+            // alert('regsiter ok')
+          } else {
+            window.location = "/register";
             //alert('lregsiter fail')
           }
-          
         } catch (error) {
           console.error("Error:", error);
         }
       }
-      
-      
+
       postJSON(jsonData);
     }
   };
 
-
-
-
-  
   const handleChange1 = (event) => {
     event.preventDefault();
     const data = event.target.value;
     async function getJSON() {
-              
-      const response = await fetch("http://localhost:3333/gettambon/"+data, {
+      const response = await fetch("http://localhost:3333/gettambon/" + data, {
         method: "GET", // or 'PUT'
-        
-     
       });
-  
-       
-      
-      const data1 = await response.json();
-      
-      if(data1.length===0){
-        console.log(data1.length);
-  }
-  else {
-    console.log("data1",data1);
-      localStorage.setItem('tambon_id',data1[0].tambon_id)
-    setData1(data1[0].tambon_id);
-  }
 
-  }
-  getJSON();
+      const data1 = await response.json();
+
+      if (data1.length === 0) {
+        console.log(data1.length);
+      } else {
+        console.log("data1", data1);
+        localStorage.setItem("tambon_id", data1[0].tambon_id);
+        setData1(data1[0].tambon_id);
+      }
+    }
+    getJSON();
   };
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -156,20 +129,22 @@ export default function SignUp() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
           <Typography component="h1" variant="h5">
-            ลงทะเบียนเปิดเคส
+            ข้อมูลส่วนตัว
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
-            <Grid item xs={12}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -254,35 +229,27 @@ export default function SignUp() {
         </Select>
         </FormControl>
             </Grid> */}
-            <Grid item xs={12}>
-                <TextField  onChange={handleChange1}
-                  
+              <Grid item xs={12}>
+                <TextField
+                  onChange={handleChange1}
                   fullWidth
                   id="postcode"
                   label="รหัสไปรษณีย์"
                   name="postcode"
-                  
                 />
               </Grid>
             </Grid>
-            <Button 
+            <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              เปิดเคส
+              ยืนยัน
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
+            <Grid container justifyContent="flex-end"></Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

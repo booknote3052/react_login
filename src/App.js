@@ -8,9 +8,9 @@ import Dashboard from './Dashboard';
 function App() {
   return (
     
-    <Dashboard>
-    <Route path="/dashboard" element={<Dashboard />} />
-    </Dashboard>
+ 
+   <div></div>
+ 
     
   );
 }
